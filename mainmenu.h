@@ -1,0 +1,42 @@
+#ifndef MAINMENU_H
+#define MAINMENU_H
+
+#include <QMainWindow>
+#include <QWidget>
+#include <deque.h>
+#include <levels.h>
+#include <statistic.h>
+#include <player.h>
+
+namespace Ui {
+class MainMenu;
+}
+
+class MainMenu : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit MainMenu(Player *currentPlayer, DEQUE<Player>* allPlayers, QWidget *parent = 0);
+    ~MainMenu();
+
+signals:
+
+private slots:
+
+    void on_goToPlayButton_clicked();
+
+    void on_quitGame_clicked();
+
+    void on_stat_clicked();
+
+private:
+
+    Ui::MainMenu   *ui;
+    QGraphicsScene *scene;
+    DFSMaze        *img;
+    Levels         *levels;
+    Statistic          *statistic;
+};
+
+#endif // MAINMENU_H
