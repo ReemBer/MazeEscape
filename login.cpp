@@ -1,18 +1,23 @@
 #include "login.h"
 #include "ui_login.h"
 
-Login::Login(DEQUE<Player> *allPlayers, QWidget *parent) :
+Login::Login(DEQUE<Player> *allPlayers, MediaController *_mediaController, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
 {
     ui->setupUi(this);
 
     allplayers = allPlayers;
+    mediaController = _mediaController;
 
     ui->OK->setEnabled(false);
     QRegExp exp("[a-zA-Z0-9]{1,20}");
     ui->nickNameLine->setValidator(new QRegExpValidator(exp, this));
+    ui->password->setValidator(new QRegExpValidator(exp, this));
+    ui->password->setEchoMode(QLineEdit::EchoMode::Password);
+
     connect(ui->nickNameLine, SIGNAL(textChanged(QString)), this, SLOT(OkEnabled()));
+    connect(ui->password, SIGNAL(textChanged(QString)), this, SLOT(OkEnabled()));
 }
 
 Login::~Login()
@@ -28,6 +33,7 @@ void Login::OkEnabled()
 
 void Login::on_OK_clicked()
 {
+    mediaController->playButtonClickSound();
     try
     {
         QString curNickName = ui->nickNameLine->displayText();
@@ -64,5 +70,7 @@ int Login::getNickNameSize()
 
 void Login::on_signUp_clicked()
 {
+    mediaController->playButtonClickSound();
+    Sleep(DWORD(375));
     this->close();
 }

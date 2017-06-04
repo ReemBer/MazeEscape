@@ -1,7 +1,10 @@
 #ifndef TOP10_H
 #define TOP10_H
 
+#include <mediacontroller.h>
+
 #include <QWidget>
+
 #include <deque.h>
 #include <player.h>
 
@@ -18,7 +21,9 @@ private:
     DEQUE<Player>* allplayers;
 
 public:
-    explicit Statistic(DEQUE<Player> *allPlayers, QWidget *parent = 0);
+    explicit Statistic(DEQUE<Player> *allPlayers,
+                       MediaController *_mediaController,
+                       QWidget *parent = 0);
     ~Statistic();
 
 signals:
@@ -34,6 +39,8 @@ private slots:
 
 private:
     Ui::Statistic *ui;
+
+    MediaController *mediaController;
 };
 
 #endif // TOP10_H

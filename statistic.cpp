@@ -1,14 +1,19 @@
 #include "statistic.h"
 #include "ui_Statistic.h"
+
 #include <QTableWidgetItem>
 #include <QString>
 #include <string.h>
 
-Statistic::Statistic(DEQUE<Player> *allPlayers, QWidget *parent) :
+Statistic::Statistic(DEQUE<Player> *allPlayers,
+                     MediaController *_mediaController,
+                     QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Statistic)
 {
     ui->setupUi(this);
+
+    mediaController = _mediaController;
 
     this->resize(1000, 600);
     this->setFixedSize(1000, 600);
@@ -24,6 +29,7 @@ Statistic::~Statistic()
 
 void Statistic::on_backTomenu_clicked()
 {
+    mediaController->playButtonClickSound();
     emit backToMenu();
     this->close();
 }

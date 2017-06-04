@@ -2,6 +2,7 @@
 #define GAMELEVEL_H
 
 #include <QObject>
+
 #include <maze.h>
 
 class GAMELEVEL : public QObject

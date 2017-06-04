@@ -1,11 +1,15 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
+#include <windows.h>
+
 #include <QDialog>
 #include <QString>
+#include <QMessageBox>
+
 #include <deque.h>
 #include <player.h>
-#include <QMessageBox>
+#include <mediacontroller.h>
 
 namespace Ui {
 class Login;
@@ -19,9 +23,10 @@ private:
     DEQUE<Player> *allplayers;
     int   nickNameSize;
     char* nickName;
+    MediaController *mediaController;
 
 public:
-    explicit Login(DEQUE<Player> *allPkayers, QWidget *parent = 0);
+    explicit Login(DEQUE<Player> *allPkayers, MediaController *_mediaController, QWidget *parent = 0);
     ~Login();
 
 public:

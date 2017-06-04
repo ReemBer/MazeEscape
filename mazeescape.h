@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+
 #include <fstream>
 #include <gamelevel.h>
 #include <deque.h>
@@ -10,6 +11,7 @@
 #include <mainmenu.h>
 #include <levels.h>
 #include <login.h>
+#include "mediacontroller.h"
 
 using namespace std;
 
@@ -21,7 +23,6 @@ using namespace std;
  * - статические уровни [10 шт];
  * - список зарегистрированных игроков [подгружается из файла users.txt];
  */
-
 class MazeEscape : public QObject
 {
     friend class Top10;
@@ -35,10 +36,14 @@ public:
 
     const char* userFileName  = "players.txt";
 
+
+
 private:
 
     Player       *currentPlayer;
     DEQUE<Player> allPlayers;
+
+    MediaController *mediaController;
 
 public:
 
@@ -49,8 +54,6 @@ public:
 
     explicit MazeEscape(QObject *parent = 0);
     ~MazeEscape();
-
-public:
 
     void startGame();
 

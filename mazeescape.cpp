@@ -27,7 +27,11 @@ MazeEscape::MazeEscape(QObject *parent) : QObject(parent)
         }
         users.close();
 
-        loginWindow    = new Login(&allPlayers);
+        mediaController = new MediaController(this);
+
+        loginWindow = new Login(&allPlayers, mediaController);
+
+        connect(loginWindow, &Login::loggedIn, mediaController, &MediaController::playMainThemeSound);
         connect(loginWindow, SIGNAL(loggedIn()), this, SLOT(loginCompleted()));
     }
     catch(...)
@@ -102,7 +106,7 @@ void MazeEscape::loginCompleted()
     }
     try
     {
-        mainMenuWindow = new MainMenu(currentPlayer, &allPlayers);
+        mainMenuWindow = new MainMenu(currentPlayer, &allPlayers, mediaController);
         if(!mainMenuWindow) throw 1;
         mainMenuWindow->show();
     }
